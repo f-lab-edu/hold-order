@@ -68,9 +68,9 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         aws deploy create-deployment \
-        --application-name coinTalk[만든 애플리케이션 이름] \
-        --deployment-group-name coinTalk-group[만든 애플리케이션 그룹 이름] \
+        --application-name holdOrder \
+        --deployment-group-name hold-order \
         --file-exists-behavior OVERWRITE \
-        --s3-location bucket=cointalk-deploy[S3버킷이름],bundleType=zip,key=coinTalk.zip[S3버킷 속 압축파일] \ 
+        --s3-location bucket=hold-order,bundleType=zip,key=coinTalk.zip \ 
         --region ap-northeast-2
 
