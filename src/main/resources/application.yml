@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: HoldOrder
+  profiles:
+    active:
+      - dev
