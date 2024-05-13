@@ -11,4 +11,10 @@ public class MainPageController {
         return "home";
     }
 
+    @GetMapping("/home2")
+    public String homepage2() {
+        return "home2";
+    }
+
+
 }
