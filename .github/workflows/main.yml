@@ -67,10 +67,10 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
-        aws deploy create-deployment \
-        --application-name holdOrder \
-        --deployment-group-name hold-order \
-        --file-exists-behavior OVERWRITE \
-        --s3-location bucket=hold-order,bundleType=zip,key=holdOrder.zip \ 
+        aws deploy create-deployment
+        --application-name holdOrder
+        --deployment-group-name hold-order
+        --file-exists-behavior OVERWRITE
+        --s3-location bucket=hold-order,bundleType=zip,key=holdOrder.zip
         --region ap-northeast-2
 
