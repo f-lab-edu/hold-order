@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainPageController2 {
 
     @GetMapping("/home3")
-    public String homepage2() {
-        return "home2";
+    public String homepage3() {
+        return "home3";
     }
-
 
 }
