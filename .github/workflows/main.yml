@@ -69,7 +69,7 @@ jobs:
       run:
         aws deploy create-deployment
         --application-name holdOrder2
-        --deployment-group-name hold-order2
+        --deployment-group-name hold-group2
         --file-exists-behavior OVERWRITE
         --s3-location bucket=hold-order,bundleType=zip,key=holdOrder2.zip
         --region ap-northeast-2
