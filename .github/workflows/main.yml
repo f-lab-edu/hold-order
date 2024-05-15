@@ -46,7 +46,7 @@ jobs:
       run: cp ./scripts/*.sh ./deploy
 
     - name: Make zip file
-      run: zip -r ./holdOrder.zip ./deploy
+      run: zip -r ./holdOrder2.zip ./deploy
       shell: bash
 
     - name: Configure AWS credentials
@@ -57,7 +57,7 @@ jobs:
         aws-region: ap-northeast-2
 
     - name: Upload to S3
-      run: aws s3 cp --region ap-northeast-2 ./holdOrder.zip s3://$S3_BUCKET_NAME/
+      run: aws s3 cp --region ap-northeast-2 ./holdOrder2.zip s3://$S3_BUCKET_NAME/
 
 
 
@@ -68,9 +68,9 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run:
         aws deploy create-deployment
-        --application-name holdOrder
-        --deployment-group-name hold-order
+        --application-name holdOrder2
+        --deployment-group-name hold-group2
         --file-exists-behavior OVERWRITE
-        --s3-location bucket=hold-order,bundleType=zip,key=holdOrder.zip
+        --s3-location bucket=hold-order,bundleType=zip,key=holdOrder2.zip
         --region ap-northeast-2
 
