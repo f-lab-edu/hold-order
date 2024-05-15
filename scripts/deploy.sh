@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
 
 REPOSITORY=/home/ubuntu/app
-JAR_NAME=$(pgrep -fla java | grep HoldOrder | awk '{print $1}')
+JAR_NAME=$(pgrep -fla java | grep HoldOrder | awk '{print $5}')
+CURRENT_PID=$(pgrep -fla java | grep HoldOrder | awk '{print $1}')
 
 mkdir /home/ubuntu/app/log
+
 echo "> 현재 구동 중인 애플리케이션 pid 확인" >> $REPOSITORY/log/deploy.log
-
-
-CURRENT_PID=pgrep -f $JAR_NAME
-
 echo "현재 구동 중인 애플리케이션 pid: $CURRENT_PID" >> $REPOSITORY/log/deploy.log
 
 if [ -z "$CURRENT_PID" ]; then
