@@ -10,6 +10,12 @@
 - JUnit 5
 - MySQL
 
+- swagger
 
 ## 상품 설계
 ![hold-order.png](src%2Fmain%2Fresources%2Fimage%2Fhold-order.png)
+
+## swagger 설정
+http://localhost/swagger-ui/index.html
+
+![swagger.png](src%2Fmain%2Fresources%2Fimage%2Fswagger.png)

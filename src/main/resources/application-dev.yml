@@ -28,3 +28,10 @@ spring:
   output:
     ansi:
       enabled: always # logging coloring
+
+
+# swagger
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  model-and-view-allowed: true
