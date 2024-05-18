@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 
 @NoArgsConstructor
 @Getter
-@Builder
 public class GoodsOption {
 
     private String optionId;
@@ -19,4 +18,14 @@ public class GoodsOption {
     private Timestamp regiDt;
     private Timestamp updaDt;
 
+    @Builder
+    public GoodsOption(String optionId, String goodsId, String optionNm, int optionPrice, int sort, Timestamp regiDt, Timestamp updaDt) {
+        this.optionId = optionId;
+        this.goodsId = goodsId;
+        this.optionNm = optionNm;
+        this.optionPrice = optionPrice;
+        this.sort = sort;
+        this.regiDt = regiDt;
+        this.updaDt = updaDt;
+    }
 }

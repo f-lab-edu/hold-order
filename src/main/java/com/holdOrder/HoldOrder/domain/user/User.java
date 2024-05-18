@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 
 @NoArgsConstructor
 @Getter
-@Builder
 public class User {
 
     private String userId;
@@ -18,4 +17,13 @@ public class User {
     private Timestamp regiDt;
     private Timestamp updaDt;
 
+    @Builder
+    public User(String userId, String nickName, String name, UserRoleType role, Timestamp regiDt, Timestamp updaDt) {
+        this.userId = userId;
+        this.nickName = nickName;
+        this.name = name;
+        this.role = role;
+        this.regiDt = regiDt;
+        this.updaDt = updaDt;
+    }
 }
