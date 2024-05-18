@@ -9,3 +9,22 @@ spring:
   mvc:
     view:
       suffix: .html
+  datasource:
+    url: jdbc:h2:mem:test;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+    properties:
+#      '[hibernate.default_batch_fetch_size]': 1000  # rimit in size is 1000
+      '[hibernate.format_sql]': true
+    show-sql: true
+  output:
+    ansi:
+      enabled: always # logging coloring
