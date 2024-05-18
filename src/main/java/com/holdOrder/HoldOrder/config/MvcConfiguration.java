@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class MvcConfiguration implements WebMvcConfigurer {
 
+    // controller에서 view의 경로를 찾을 때, templates와 static 경로를 고려함
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
