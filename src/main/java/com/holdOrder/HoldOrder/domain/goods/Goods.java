@@ -1,5 +1,7 @@
 package com.holdOrder.HoldOrder.domain.goods;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,8 +10,10 @@ import java.sql.Timestamp;
 
 @NoArgsConstructor
 @Getter
+@Entity
 public class Goods {
 
+    @Id
     private String goodsId;
     private String categoryId;
     private String sellerId;

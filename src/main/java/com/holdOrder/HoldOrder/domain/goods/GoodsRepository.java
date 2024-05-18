@@ -1,4 +1,6 @@
 package com.holdOrder.HoldOrder.domain.goods;
 
-public interface GoodsRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface GoodsRepository extends JpaRepository<Goods, String> {
 }

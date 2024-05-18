@@ -1,5 +1,8 @@
 package com.holdOrder.HoldOrder.domain.user;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,8 +11,11 @@ import java.sql.Timestamp;
 
 @NoArgsConstructor
 @Getter
+@Entity
+@Table(name = "USER")
 public class User {
 
+    @Id
     private String userId;
     private String nickName;
     private String name;
