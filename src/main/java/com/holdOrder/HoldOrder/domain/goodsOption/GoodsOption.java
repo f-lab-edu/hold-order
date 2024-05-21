@@ -18,12 +18,18 @@ import java.sql.Timestamp;
 public class GoodsOption {
     @Id
     private String optionId;
+
     private String goodsId;
+
     private String optionNm;
+
     private int optionPrice;
+
     private int sort; // 옵션 정렬 순서
+
     @CreatedDate
     private Timestamp regiDt;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GOODS_ID")
     private Goods goods;

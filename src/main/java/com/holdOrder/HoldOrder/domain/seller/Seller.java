@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -20,10 +21,14 @@ import java.util.List;
 public class Seller {
     @Id
     private String sellerId;
+
     private String sellerNm;
+
     @CreatedDate
     private Timestamp regiDt;
+
     @OneToMany(mappedBy = "sellerId", fetch = FetchType.LAZY)
+    @BatchSize(size = 20)
     private List<Goods> goodsList = new ArrayList<>();
 
     @Builder
