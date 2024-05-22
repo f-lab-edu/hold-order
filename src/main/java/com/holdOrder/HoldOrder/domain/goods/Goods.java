@@ -20,27 +20,20 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 public class Goods {
     @Id
+    @Column(name = "GOODS_ID")
     private String goodsId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SELLER_ID")
     private Seller sellerId;
-
     private String goodsNm; // 굿즈명
-
     private String intr; // 굿즈 소개글
-
     private String goodsImgUrl; // 굿즈 이미지
-
     private int goodsPrice; // 굿즈 가격(총 가격 = 옵션가격 총합 + 굿즈가격)
-
-    private boolean usedYn = false; // 상품 개시여부
-
-    private boolean deleYn = false; // 삭제여부. false = 삭제안됨, true = 삭제됨 TODO 이걸 가져갈 필요가 있을까?
-
+    private boolean usedYn; // 상품 개시여부
+    private boolean deleYn; // 삭제여부. false = 삭제안됨, true = 삭제됨
     @CreatedDate
     private Timestamp regiDt;
-
-    @OneToMany(mappedBy = "goods") // TODO 이걸 거는게 맞는가?
+    @OneToMany(mappedBy = "goods")
     private List<GoodsOption> goodsOptions = new ArrayList<>();
 
     @Builder

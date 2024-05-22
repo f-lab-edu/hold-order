@@ -21,14 +21,10 @@ import java.util.List;
 public class Seller {
     @Id
     private String sellerId;
-
     private String sellerNm;
-
     @CreatedDate
     private Timestamp regiDt;
-
     @OneToMany(mappedBy = "sellerId", fetch = FetchType.LAZY)
-    @BatchSize(size = 20)
     private List<Goods> goodsList = new ArrayList<>();
 
     @Builder
