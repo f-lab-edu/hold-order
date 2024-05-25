@@ -25,7 +25,6 @@ public class GoodsOption {
     @CreatedDate
     private Timestamp regiDt;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "GOODS_ID")
     private Goods goods;
     @Builder
     public GoodsOption(String optionId, String goodsId, String optionNm, int optionPrice, int sort, Timestamp regiDt, Goods goods) {
