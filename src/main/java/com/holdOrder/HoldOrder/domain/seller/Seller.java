@@ -1,37 +1,55 @@
 package com.holdOrder.HoldOrder.domain.seller;
 
+import com.holdOrder.HoldOrder.config.EntityDate;
 import com.holdOrder.HoldOrder.domain.goods.Goods;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.BatchSize;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @NoArgsConstructor
 @Getter
 @Entity
 @Table(name = "SELLER")
-@EntityListeners(AuditingEntityListener.class)
-public class Seller {
+public class Seller extends EntityDate {
     @Id
-    private String sellerId;
-    private String sellerNm;
-    @CreatedDate
-    private Timestamp regiDt;
-    @OneToMany(mappedBy = "sellerId", fetch = FetchType.LAZY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "SELLER_ID")
+    private Long id;
+    @Column(name = "NAME")
+    private String name;
+    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY)
     private List<Goods> goodsList = new ArrayList<>();
 
     @Builder
-    public Seller(String sellerId, String sellerNm, Timestamp regiDt, List<Goods> goodsList) {
-        this.sellerId = sellerId;
-        this.sellerNm = sellerNm;
-        this.regiDt = regiDt;
+    public Seller(String name, List<Goods> goodsList) {
+        this.name = name;
         this.goodsList = goodsList;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Seller) {
+            return this.id.equals(((Seller) obj).getId());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() { // TODO
+        return "Seller{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", goodsList=" + goodsList +
+                '}';
     }
 }

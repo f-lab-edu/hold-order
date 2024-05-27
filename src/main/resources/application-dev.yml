@@ -22,7 +22,7 @@ spring:
     hibernate:
       ddl-auto: create
     properties:
-      #      '[hibernate.default_batch_fetch_size]': 1000  # rimit in size is 1000
+      '[hibernate.default_batch_fetch_size]': 100  # rimit in size is 100
       '[hibernate.format_sql]': true
     show-sql: true
   output:
