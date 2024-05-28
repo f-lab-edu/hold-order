@@ -14,13 +14,13 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Entity
-@Table(name = "SELLER")
+@Table(name = "seller")
 public class Seller extends EntityDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SELLER_ID")
+    @Column(name = "seller_id")
     private Long id;
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY)
     private List<Goods> goodsList = new ArrayList<>();

@@ -16,37 +16,37 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Entity
-@Table(name = "GOODS")
-@SQLRestriction("DELETED_YN = false")
+@Table(name = "goods")
+@SQLRestriction("deleted_yn = false")
 public class Goods extends EntityDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "GOODS_ID")
+    @Column(name = "goods_id")
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SELLER_ID")
+    @JoinColumn(name = "seller_id")
     private Seller seller;
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name; // 굿즈명
-    @Column(name = "INTR")
-    private String intr; // 굿즈 소개글
-    @Column(name = "GOODS_IMG_URL")
-    private String goodsImgUrl; // 굿즈 이미지
-    @Column(name = "GOODS_PRICE")
+    @Column(name = "intr")
+    private String introduction; // 굿즈 소개글
+    @Column(name = "goods_img_url")
+    private String goodsImageUrl; // 굿즈 이미지
+    @Column(name = "goods_price")
     private Integer goodsPrice; // 굿즈 가격(총 가격 = 옵션가격 총합 + 굿즈가격)
-    @Column(name = "USED_YN")
+    @Column(name = "used_yn")
     private Boolean usedYn; // 상품 개시여부
-    @Column(name = "DELETED_YN")
+    @Column(name = "deleted_yn")
     private Boolean deletedYn; // 삭제여부. false = 삭제안됨, true = 삭제됨
     @OneToMany(mappedBy = "goods")
     private List<GoodsOption> goodsOptions = new ArrayList<>();
 
     @Builder
-    public Goods(Seller seller, String name, String intr, String goodsImgUrl, Integer goodsPrice, Boolean usedYn, Boolean deletedYn, List<GoodsOption> goodsOptions) {
+    public Goods(Seller seller, String name, String introduction, String goodsImageUrl, Integer goodsPrice, Boolean usedYn, Boolean deletedYn, List<GoodsOption> goodsOptions) {
         this.seller = seller;
         this.name = name;
-        this.intr = intr;
-        this.goodsImgUrl = goodsImgUrl;
+        this.introduction = introduction;
+        this.goodsImageUrl = goodsImageUrl;
         this.goodsPrice = goodsPrice;
         this.usedYn = usedYn;
         this.deletedYn = deletedYn;
@@ -67,17 +67,17 @@ public class Goods extends EntityDate {
     }
 
     @Override
-    public String toString() { // TODO
+    public String toString() {
         return "Goods{" +
-                "id='" + id + '\'' +
-                ", seller=" + seller +
+                "id=" + id +
+                ", sellerId=" + seller.getId() +
                 ", name='" + name + '\'' +
-                ", intr='" + intr + '\'' +
-                ", goodsImgUrl='" + goodsImgUrl + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", goodsImageUrl='" + goodsImageUrl + '\'' +
                 ", goodsPrice=" + goodsPrice +
                 ", usedYn=" + usedYn +
                 ", deletedYn=" + deletedYn +
-                ", goodsOptions=" + goodsOptions +
+                ", goodsOptionsList=" + goodsOptions.toString() +
                 '}';
     }
 }
