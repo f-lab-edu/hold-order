@@ -15,11 +15,11 @@ import java.time.LocalDateTime;
 @Getter
 public abstract class EntityDate {
     @CreatedDate
-    @Column(nullable = false, updatable = false, name = "CREATED_AT")
+    @Column(nullable = false, updatable = false, name = "created_at")
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(name = "MODIFIED_AT")
+    @Column(name = "modified_at")
     private LocalDateTime modifiedAt;
 
 }
