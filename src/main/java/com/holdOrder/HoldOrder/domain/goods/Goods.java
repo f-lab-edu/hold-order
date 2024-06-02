@@ -4,20 +4,18 @@ import com.holdOrder.HoldOrder.config.EntityDate;
 import com.holdOrder.HoldOrder.domain.goodsOption.GoodsOption;
 import com.holdOrder.HoldOrder.domain.seller.Seller;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.SQLRestriction;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @NoArgsConstructor
 @Getter
 @Entity
 @Table(name = "goods")
 @SQLRestriction("deleted_yn = false")
+@EqualsAndHashCode(callSuper = false, of = "id")
 public class Goods extends EntityDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,18 +51,6 @@ public class Goods extends EntityDate {
         this.goodsOptions = goodsOptions;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Goods) {
-            return this.id.equals(((Goods) obj).getId());
-        }
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 
     @Override
     public String toString() {

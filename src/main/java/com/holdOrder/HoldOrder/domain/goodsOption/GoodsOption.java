@@ -4,15 +4,15 @@ import com.holdOrder.HoldOrder.config.EntityDate;
 import com.holdOrder.HoldOrder.domain.goods.Goods;
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.Objects;
 
 @NoArgsConstructor
 @Getter
 @Entity
 @Table(name = "goods_option")
+@EqualsAndHashCode(callSuper = false, of = "id")
 public class GoodsOption extends EntityDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,19 +35,6 @@ public class GoodsOption extends EntityDate {
         this.name = name;
         this.optionPrice = optionPrice;
         this.sort = sort;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof GoodsOption) {
-            return this.id.equals(((GoodsOption) obj).getId());
-        }
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 
     @Override
