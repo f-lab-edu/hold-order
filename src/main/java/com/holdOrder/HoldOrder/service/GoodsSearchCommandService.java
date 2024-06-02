@@ -12,12 +12,8 @@ public class GoodsSearchCommandService {
         return null;
     }
 
-    ;
-
     public List<GoodsResponseDto> findList() {
         return null;
     }
-
-    ;
 
 }
