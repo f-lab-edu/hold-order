@@ -37,7 +37,6 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
     compileOnly 'org.projectlombok:lombok'
-//    runtimeOnly 'com.h2database:h2'
     runtimeOnly("com.mysql:mysql-connector-j")
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'

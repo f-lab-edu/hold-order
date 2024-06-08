@@ -3,16 +3,14 @@ package com.holdOrder.HoldOrder.domain.seller;
 import com.holdOrder.HoldOrder.config.EntityDate;
 import com.holdOrder.HoldOrder.domain.goods.Goods;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 @Table(name = "seller")
 @EqualsAndHashCode(callSuper = false, of = "id")
