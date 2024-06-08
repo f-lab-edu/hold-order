@@ -1,15 +1,14 @@
 package com.holdOrder.HoldOrder.service;
 
 import com.holdOrder.HoldOrder.domain.goods.Goods;
-import com.holdOrder.HoldOrder.domain.goods.QGoods;
 import com.holdOrder.HoldOrder.dto.goods.GoodsInfoResponseDto;
 import com.holdOrder.HoldOrder.dto.goods.GoodsResponseDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.awt.print.Pageable;
-import java.util.NoSuchElementException;
 
 @Service
 public class GoodsFindService {
@@ -20,6 +19,7 @@ public class GoodsFindService {
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
+    @Transactional(readOnly = true)
     public GoodsInfoResponseDto find(Long id) {
 //        QGoods goods = QGoods.goods;
 //        Goods goodsResult = jpaQueryFactory.selectFrom(goods)
