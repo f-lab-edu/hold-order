@@ -10,13 +10,20 @@ spring:
     view:
       suffix: .html
   datasource:
-    url: jdbc:h2:mem://localhost/~/test;MODE=MySQL;NON_KEYWORDS=USER
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: true
+    master:
+      hikari:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:4406/mydb
+        read-only: false
+        username: mydb_user
+        password: mydb_pwd
+    slave:
+      hikari:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3322/mydb
+        read-only: true
+        username: mydb_slave_user
+        password: mydb_slave_pwd
   jpa:
     open-in-view: false
     hibernate:

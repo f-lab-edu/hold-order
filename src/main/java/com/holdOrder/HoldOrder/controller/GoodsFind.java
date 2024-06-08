@@ -25,12 +25,12 @@ public class GoodsFind {
         this.goodsFindService = goodsFindService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find/{id}") // TODO
     public ResponseEntity<GoodsInfoResponseDto> find(@PathVariable Long id) {
         return new ResponseEntity<>(goodsFindService.find(id), HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/findList") // TODO
     public ResponseEntity<GoodsResponseDto> findList(@Valid GoodsFindRequestDto goodsFindRequestDto, Pageable pageable) {
         return new ResponseEntity<>(goodsFindService.findList(goodsFindRequestDto.toEntity(), pageable), HttpStatus.OK);
     }
