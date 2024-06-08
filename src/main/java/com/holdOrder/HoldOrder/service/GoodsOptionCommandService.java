@@ -6,9 +6,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class GoodsOptionCommandService {
 
-    public GoodsOptionResponseDto find() {
-        return null;
-    }
 
     public GoodsOptionResponseDto modify() {
         return null;
