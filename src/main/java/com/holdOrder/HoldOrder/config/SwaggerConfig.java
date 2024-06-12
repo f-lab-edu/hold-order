@@ -11,8 +11,8 @@ public class SwaggerConfig {
     public OpenAPI openAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("주문에 잘 견디는 API")
-                        .description("대용량 트래픽에서 잘 견디는 객체지향 프로젝트")
+                        .title("조회 성능이 좋은 API")
+                        .description("상품 검색 성능이 빠른 프로젝트")
                         .version("1.0.0"));
     }
 }
