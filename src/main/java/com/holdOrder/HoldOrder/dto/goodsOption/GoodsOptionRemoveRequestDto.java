@@ -1,7 +1,6 @@
 package com.holdOrder.HoldOrder.dto.goodsOption;
 
 
-public class GoodsOptionModifyRequestDto {
-
+public class GoodsOptionRemoveRequestDto {
 
 }
