@@ -36,12 +36,6 @@ spring:
     ansi:
       enabled: always # logging coloring
 
-#logging:
-#  level:
-#    com:
-#      zaxxer:
-#        hikari: DEBUG
-
 # swagger
 springdoc:
   default-consumes-media-type: application/json
