@@ -1,6 +1,6 @@
 package com.holdOrder.HoldOrder.service;
 
-import com.holdOrder.HoldOrder.domain.goods.Goods;
+import com.holdOrder.HoldOrder.dto.goods.GoodsFindRequestDto;
 import com.holdOrder.HoldOrder.dto.goods.GoodsInfoResponseDto;
 import com.holdOrder.HoldOrder.dto.goods.GoodsResponseDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -21,18 +21,10 @@ public class GoodsFindService {
 
     @Transactional(readOnly = true)
     public GoodsInfoResponseDto find(Long id) {
-//        QGoods goods = QGoods.goods;
-//        Goods goodsResult = jpaQueryFactory.selectFrom(goods)
-//                .where(goods.id.eq(id))
-//                .fetchOne();
-//
-//        if (goodsResult == null) throw new NoSuchElementException("굿즈가 존재하지 않습니다.");
-//
-//        return new GoodsInfoResponseDto(goodsResult);
         return null;
     }
 
-    public GoodsResponseDto findList(Goods goodsReqDto, Pageable pageable) {
+    public GoodsResponseDto findList(GoodsFindRequestDto goodsFindRequestDto, Pageable pageable) {
         return null;
     }
 

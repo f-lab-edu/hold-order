@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/goods")
-public class GoodsCommand {
+public class GoodsCommandController {
     private final GoodsCommandService goodsCommandService;
 
     @Autowired
-    public GoodsCommand(GoodsCommandService goodsCommandService) {
+    public GoodsCommandController(GoodsCommandService goodsCommandService) {
         this.goodsCommandService = goodsCommandService;
     }
 

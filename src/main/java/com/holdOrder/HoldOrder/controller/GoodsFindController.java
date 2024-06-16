@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.awt.print.Pageable;
 
 @Controller
-public class GoodsFind {
+public class GoodsFindController {
 
     private final GoodsFindService goodsFindService;
 
     @Autowired
-    public GoodsFind(GoodsFindService goodsFindService) {
+    public GoodsFindController(GoodsFindService goodsFindService) {
         this.goodsFindService = goodsFindService;
     }
 
@@ -32,6 +32,6 @@ public class GoodsFind {
 
     @PostMapping("/findList") // TODO
     public ResponseEntity<GoodsResponseDto> findList(@Valid GoodsFindRequestDto goodsFindRequestDto, Pageable pageable) {
-        return new ResponseEntity<>(goodsFindService.findList(goodsFindRequestDto.toEntity(), pageable), HttpStatus.OK);
+        return new ResponseEntity<>(goodsFindService.findList(goodsFindRequestDto, pageable), HttpStatus.OK);
     }
 }

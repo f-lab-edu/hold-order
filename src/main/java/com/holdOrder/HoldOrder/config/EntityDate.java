@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public abstract class EntityDate {
-    @Column(name = "createdUser")
+    @Column(name = "created_user", updatable = false)
     private String createdUser;
 
     @CreatedDate

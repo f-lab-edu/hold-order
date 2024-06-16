@@ -16,7 +16,7 @@ public class GoodsFindRequestDto {
     @Size(min = 2, max = 100, message = "상품 명은 최소 두 글자, 최대 100 글자 까지 가능합니다.")
     private String name;
 
-    @Positive(message = "양수만 가능합니다.")
+    @Positive
     @Max(value = Long.MAX_VALUE)
     private Integer goodsPrice;
 

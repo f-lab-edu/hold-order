@@ -6,6 +6,7 @@ import com.holdOrder.HoldOrder.domain.seller.Seller;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
 
@@ -22,13 +23,14 @@ public class DBReplicationTest {
     TestSellerFindService testSellerFindService;
 
     @Test
-    public void DB_복제가_제대로_이루어졌는지_확인_저장() throws Exception {
+    @Transactional
+    public void DB_복제가_제대로_이루어졌는지_확인_저장() {
         // given
         Seller dummySeller = Seller.builder()
                 .name("testnameA")
                 .build();
 
-        dummySeller.setId(1L);
+//        dummySeller.setId(1L);
 
 
         // when
