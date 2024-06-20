@@ -1,6 +1,10 @@
 package com.holdOrder.HoldOrder.domain.goodsOption;
 
-public interface GoodsOptionRepositoryCustom {
+import java.util.List;
 
-    GoodsOption saveGoodsOption(GoodsOption goodsOption);
+public interface GoodsOptionRepositoryCustom {
+    List<GoodsOption> findAllByGoodsId(Long goodsId);
+    Integer findTopByGoodsIdOrderBySortDesc(Long goodsId);
+
+    Long findGoodsIdByGoodsOptionId(Long id);
 }

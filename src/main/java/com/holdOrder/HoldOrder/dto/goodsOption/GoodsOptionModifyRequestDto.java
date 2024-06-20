@@ -2,11 +2,13 @@ package com.holdOrder.HoldOrder.dto.goodsOption;
 
 
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class GoodsOptionModifyRequestDto {
     @NotNull
     @Positive

@@ -11,6 +11,7 @@ import lombok.*;
 @Setter
 @Entity
 @Table(name = "goods_option")
+@ToString(exclude = "goods")
 @EqualsAndHashCode(callSuper = false, of = "id")
 public class GoodsOption extends EntityDate {
     @Id
@@ -41,16 +42,5 @@ public class GoodsOption extends EntityDate {
         this.name = goodsOptionModifyRequestDto.getName();
         this.optionPrice = goodsOptionModifyRequestDto.getOptionPrice();
         this.sort = goodsOptionModifyRequestDto.getSort();
-    }
-
-    @Override
-    public String toString() {
-        return "GoodsOption{" +
-                "id=" + id +
-//                ", goodsId=" + goods.getId() +
-                ", name='" + name + '\'' +
-                ", optionPrice=" + optionPrice +
-                ", sort=" + sort +
-                '}';
     }
 }

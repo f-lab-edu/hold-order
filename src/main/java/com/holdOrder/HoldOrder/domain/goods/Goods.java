@@ -12,9 +12,12 @@ import java.util.List;
 
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 @Table(name = "goods")
+@Builder
 @SQLRestriction("deleted_yn = false")
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false, of = "id")
 public class Goods extends EntityDate {
     @Id
@@ -39,31 +42,20 @@ public class Goods extends EntityDate {
     @OneToMany(mappedBy = "goods")
     private List<GoodsOption> goodsOptions = new ArrayList<>();
 
-    @Builder
-    public Goods(Seller seller, String name, String introduction, String goodsImageUrl, Integer goodsPrice, Boolean usedYn, Boolean deletedYn, List<GoodsOption> goodsOptions) {
-        this.seller = seller;
-        this.name = name;
-        this.introduction = introduction;
-        this.goodsImageUrl = goodsImageUrl;
-        this.goodsPrice = goodsPrice;
-        this.usedYn = usedYn;
-        this.deletedYn = deletedYn;
-        this.goodsOptions = goodsOptions;
-    }
 
 
     @Override
     public String toString() {
         return "Goods{" +
                 "id=" + id +
-                ", sellerId=" + seller.getId() +
+//                ", sellerId=" + seller.getId() +
                 ", name='" + name + '\'' +
                 ", introduction='" + introduction + '\'' +
                 ", goodsImageUrl='" + goodsImageUrl + '\'' +
                 ", goodsPrice=" + goodsPrice +
                 ", usedYn=" + usedYn +
                 ", deletedYn=" + deletedYn +
-                ", goodsOptionsList=" + goodsOptions.toString() +
+//                ", goodsOptionsList=" + goodsOptions.toString() +
                 '}';
     }
 }
