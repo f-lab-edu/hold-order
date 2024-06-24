@@ -58,7 +58,7 @@ public class GoodsOptionCommandService {
         return new GoodsOptionModifyResponseDto(savedGoodsOption);
     }
 
-    // GoodsOption 삭제하기
+    // GoodsOption 하나 삭제하기
     @Transactional
     public void remove(Long id) {
         goodsOptionRepository.delete(goodsOptionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("일치하는 굿즈 옵션을 찾을 수 없습니다.")));
