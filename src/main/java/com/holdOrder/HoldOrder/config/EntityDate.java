@@ -16,18 +16,18 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public abstract class EntityDate {
-//    @Column(name = "created_user", updatable = false)
-//    private String createdUser;
-//
-//    @CreatedDate
-//    @Column(nullable = false, updatable = false, name = "created_at")
-//    private LocalDateTime createdAt;
-//
-//    @Column(name = "modifiedUser")
-//    private String modifiedUser;
-//
-//    @LastModifiedDate
-//    @Column(name = "modified_at")
-//    private LocalDateTime modifiedAt;
+    @Column(name = "created_user", updatable = false)
+    private String createdUser;
+
+    @CreatedDate
+    @Column(nullable = false, updatable = false, name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "modifiedUser")
+    private String modifiedUser;
+
+    @LastModifiedDate
+    @Column(name = "modified_at")
+    private LocalDateTime modifiedAt;
 
 }
