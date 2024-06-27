@@ -71,7 +71,7 @@ class GoodsOptionCommandServiceTest {
         when(goodsOptionRepository.save(any(GoodsOption.class))).thenReturn(goodsOption);
 
         // When
-        GoodsOption savedGoodsOption = goodsOptionCommandService.save(requestDto);
+        GoodsOption savedGoodsOption = goodsOptionCommandService.saveWithSort(requestDto);
 
         // Then
         assertNotNull(savedGoodsOption);

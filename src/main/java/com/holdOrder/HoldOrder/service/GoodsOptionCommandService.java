@@ -4,7 +4,6 @@ import com.holdOrder.HoldOrder.domain.goodsOption.GoodsOption;
 import com.holdOrder.HoldOrder.domain.goodsOption.GoodsOptionRepository;
 import com.holdOrder.HoldOrder.dto.goodsOption.GoodsOptionModifyRequestDto;
 import com.holdOrder.HoldOrder.dto.goodsOption.GoodsOptionModifyResponseDto;
-import com.holdOrder.HoldOrder.dto.goodsOption.GoodsOptionRemoveRequestDto;
 import com.holdOrder.HoldOrder.dto.goodsOption.GoodsOptionSaveRequestDto;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,7 @@ public class GoodsOptionCommandService {
 
     // GoodsOption 하나 저장하기
     @Transactional
-    public GoodsOption save(GoodsOptionSaveRequestDto goodsOptionSaveRequestDto) {
+    public GoodsOption saveWithSort(GoodsOptionSaveRequestDto goodsOptionSaveRequestDto) {
         Integer topSortValue = goodsOptionRepository.findTopByGoodsIdOrderBySortDesc(goodsOptionSaveRequestDto.getGoodsId());
         topSortValue = topSortValue == null ? 0 : topSortValue;
         GoodsOption goodsOptionDto = goodsOptionSaveRequestDto.getGoodsOption();

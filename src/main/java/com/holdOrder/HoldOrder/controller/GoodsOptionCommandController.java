@@ -21,7 +21,7 @@ public class GoodsOptionCommandController {
 
     @PostMapping("/save")
     public ResponseEntity<GoodsOption> save(GoodsOptionSaveRequestDto goodsOptionSaveRequestDto) {
-        return new ResponseEntity<>(goodsOptionCommandService.save(goodsOptionSaveRequestDto), HttpStatus.OK);
+        return new ResponseEntity<>(goodsOptionCommandService.saveWithSort(goodsOptionSaveRequestDto), HttpStatus.OK);
     }
 
     @PostMapping("/modifiy")
