@@ -7,6 +7,7 @@ import com.holdOrder.HoldOrder.dto.goodsOption.GoodsOptionModifyRequestDto;
 import com.holdOrder.HoldOrder.dto.goodsOption.GoodsOptionModifyResponseDto;
 import com.holdOrder.HoldOrder.dto.goodsOption.GoodsOptionSaveRequestDto;
 import jakarta.persistence.EntityNotFoundException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,17 +25,42 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class GoodsOptionCommandServiceTest {
-
     @InjectMocks
     GoodsOptionCommandService goodsOptionCommandService;
-
     @Mock
     GoodsOptionRepository goodsOptionRepository;
+
+    GoodsOption dummyGoodsOption1;
+    GoodsOption dummyGoodsOption2;
+    GoodsOption dummyGoodsOption3;
+    GoodsOptionSaveRequestDto requestDto;
+
+    @BeforeEach
+    void initDummyObject() {
+        dummyGoodsOption1 = GoodsOption.builder()
+                .id(1L)
+                .name("DummyGoodsOptionName1")
+                .optionPrice(1000)
+                .sort(1)
+                .build();
+        dummyGoodsOption2 = GoodsOption.builder()
+                .id(2L)
+                .name("DummyGoodsOptionName2")
+                .optionPrice(1000)
+                .sort(2)
+                .build();
+        dummyGoodsOption3 = GoodsOption.builder()
+                .id(3L)
+                .name("DummyGoodsOptionName3")
+                .optionPrice(1000)
+                .sort(3)
+                .build();
+        requestDto = new GoodsOptionSaveRequestDto();
+    }
 
     @Test
     void GoodsOption을_저장하면_DB의_sort값을_읽어서_1을_더한_후_저장한다() {
         // Given
-        GoodsOptionSaveRequestDto requestDto = new GoodsOptionSaveRequestDto();
         requestDto.setGoodsId(1L);
         GoodsOption goodsOption = new GoodsOption();
         goodsOption.setGoods(Goods.builder().id(1L).build());
@@ -56,24 +82,6 @@ class GoodsOptionCommandServiceTest {
     @Test
     void GoodsOption_하나를_수정한다() {
         // Given
-        GoodsOption dummyGoodsOption1 = GoodsOption.builder()
-                .id(1L)
-                .name("DummyGoodsOptionName1")
-                .optionPrice(1000)
-                .sort(1)
-                .build();
-        GoodsOption dummyGoodsOption2 = GoodsOption.builder()
-                .id(2L)
-                .name("DummyGoodsOptionName2")
-                .optionPrice(1000)
-                .sort(2)
-                .build();
-        GoodsOption dummyGoodsOption3 = GoodsOption.builder()
-                .id(3L)
-                .name("DummyGoodsOptionName3")
-                .optionPrice(1000)
-                .sort(3)
-                .build();
 
         List<GoodsOption> goodsOptionList = Arrays.asList(dummyGoodsOption1, dummyGoodsOption2, dummyGoodsOption3);
         GoodsOptionModifyRequestDto goodsOptionModifyRequestDto = new GoodsOptionModifyRequestDto(1L, "수정된 이름", 1000, 4);
@@ -99,24 +107,6 @@ class GoodsOptionCommandServiceTest {
         int DUPLICATESORTVALUE = 1;
 
         // Given
-        GoodsOption dummyGoodsOption1 = GoodsOption.builder()
-                .id(1L)
-                .name("DummyGoodsOptionName1")
-                .optionPrice(1000)
-                .sort(DUPLICATESORTVALUE)
-                .build();
-        GoodsOption dummyGoodsOption2 = GoodsOption.builder()
-                .id(2L)
-                .name("DummyGoodsOptionName2")
-                .optionPrice(1000)
-                .sort(2)
-                .build();
-        GoodsOption dummyGoodsOption3 = GoodsOption.builder()
-                .id(3L)
-                .name("DummyGoodsOptionName3")
-                .optionPrice(1000)
-                .sort(3)
-                .build();
         List<GoodsOption> goodsOptionList = Arrays.asList(dummyGoodsOption1, dummyGoodsOption2, dummyGoodsOption3);
         GoodsOptionModifyRequestDto goodsOptionModifyRequestDto = new GoodsOptionModifyRequestDto(2L, "DummyGoodsOptionUniqueName", 1000, DUPLICATESORTVALUE);
         GoodsOption goodsOption = new GoodsOption(goodsOptionModifyRequestDto);
@@ -135,24 +125,6 @@ class GoodsOptionCommandServiceTest {
     @Test
     void GoodsOption_하나를_수정할_때_중복된_이름이_있다면_오류를_내뱉는다() {
         // Given
-        GoodsOption dummyGoodsOption1 = GoodsOption.builder()
-                .id(1L)
-                .name("DummyGoodsOptionName1")
-                .optionPrice(1000)
-                .sort(1)
-                .build();
-        GoodsOption dummyGoodsOption2 = GoodsOption.builder()
-                .id(2L)
-                .name("DummyGoodsOptionName2")
-                .optionPrice(1000)
-                .sort(2)
-                .build();
-        GoodsOption dummyGoodsOption3 = GoodsOption.builder()
-                .id(3L)
-                .name("DummyGoodsOptionName3")
-                .optionPrice(1000)
-                .sort(3)
-                .build();
         List<GoodsOption> goodsOptionList = Arrays.asList(dummyGoodsOption1, dummyGoodsOption2, dummyGoodsOption3);
         GoodsOptionModifyRequestDto goodsOptionModifyRequestDto = new GoodsOptionModifyRequestDto(1L, dummyGoodsOption2.getName(), 1000, 4);
         GoodsOption goodsOption = new GoodsOption(goodsOptionModifyRequestDto);
