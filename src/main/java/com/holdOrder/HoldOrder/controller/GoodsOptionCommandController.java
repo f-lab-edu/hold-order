@@ -20,7 +20,7 @@ public class GoodsOptionCommandController {
     private final GoodsOptionCommandService goodsOptionCommandService;
 
     @PostMapping("/save")
-    public ResponseEntity<GoodsOption> save(GoodsOptionSaveRequestDto goodsOptionSaveRequestDto) {
+    public ResponseEntity<GoodsOption> saveWithSort(GoodsOptionSaveRequestDto goodsOptionSaveRequestDto) {
         return new ResponseEntity<>(goodsOptionCommandService.saveWithSort(goodsOptionSaveRequestDto), HttpStatus.OK);
     }
 
