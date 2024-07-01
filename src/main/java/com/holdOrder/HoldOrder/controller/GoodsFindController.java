@@ -5,33 +5,26 @@ import com.holdOrder.HoldOrder.dto.goods.GoodsInfoResponseDto;
 import com.holdOrder.HoldOrder.dto.goods.GoodsResponseDto;
 import com.holdOrder.HoldOrder.service.GoodsFindService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.awt.print.Pageable;
 
-@Controller
-public class GoodsFind {
-
+@RestController
+@RequestMapping("/v1/goods/find/")
+@RequiredArgsConstructor
+public class GoodsFindController {
     private final GoodsFindService goodsFindService;
 
-    @Autowired
-    public GoodsFind(GoodsFindService goodsFindService) {
-        this.goodsFindService = goodsFindService;
-    }
-
-    @GetMapping("/find/{id}") // TODO
+    @GetMapping("/{id}")
     public ResponseEntity<GoodsInfoResponseDto> find(@PathVariable Long id) {
         return new ResponseEntity<>(goodsFindService.find(id), HttpStatus.OK);
     }
 
-    @PostMapping("/findList") // TODO
+    @PostMapping("/list")
     public ResponseEntity<GoodsResponseDto> findList(@Valid GoodsFindRequestDto goodsFindRequestDto, Pageable pageable) {
-        return new ResponseEntity<>(goodsFindService.findList(goodsFindRequestDto.toEntity(), pageable), HttpStatus.OK);
+        return new ResponseEntity<>(goodsFindService.findList(goodsFindRequestDto, pageable), HttpStatus.OK);
     }
 }

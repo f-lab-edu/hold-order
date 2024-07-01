@@ -25,7 +25,7 @@ public class GoodsInfoResponseDto extends EntityDate {
         this.sellerName = goods.getSeller().getName();
         this.introduction = goods.getIntroduction();
         this.goodsPrice = goods.getGoodsPrice();
-        super.setCreatedAt(goods.getCreatedAt());
-        super.setModifiedAt(goods.getModifiedAt());
+//        super.setCreatedAt(goods.getCreatedAt());
+//        super.setModifiedAt(goods.getModifiedAt());
     }
 }

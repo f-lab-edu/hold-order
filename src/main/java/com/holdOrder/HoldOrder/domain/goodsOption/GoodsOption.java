@@ -2,16 +2,16 @@ package com.holdOrder.HoldOrder.domain.goodsOption;
 
 import com.holdOrder.HoldOrder.config.EntityDate;
 import com.holdOrder.HoldOrder.domain.goods.Goods;
+import com.holdOrder.HoldOrder.dto.goodsOption.GoodsOptionModifyRequestDto;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 @Table(name = "goods_option")
+@ToString(exclude = "goods")
 @EqualsAndHashCode(callSuper = false, of = "id")
 public class GoodsOption extends EntityDate {
     @Id
@@ -37,14 +37,10 @@ public class GoodsOption extends EntityDate {
         this.sort = sort;
     }
 
-    @Override
-    public String toString() {
-        return "GoodsOption{" +
-                "id=" + id +
-                ", goodsId=" + goods.getId() +
-                ", name='" + name + '\'' +
-                ", optionPrice=" + optionPrice +
-                ", sort=" + sort +
-                '}';
+    public GoodsOption(GoodsOptionModifyRequestDto goodsOptionModifyRequestDto) {
+        this.id = goodsOptionModifyRequestDto.getId();
+        this.name = goodsOptionModifyRequestDto.getName();
+        this.optionPrice = goodsOptionModifyRequestDto.getOptionPrice();
+        this.sort = goodsOptionModifyRequestDto.getSort();
     }
 }
