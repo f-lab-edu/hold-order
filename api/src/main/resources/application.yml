@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    master:
+      hikari:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:4406/mydb
+        read-only: false
+        username: mydb_user
+        password: mydb_pwd
+    slave:
+      hikari:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:5506/mydb
+        read-only: true
+        username: mydb_slave_user
+        password: mydb_slave_pwd
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      '[hibernate.default_batch_fetch_size]': 100  # rimit in size is 100
+      '[hibernate.format_sql]': true
+    show-sql: true
+  output:
+    ansi:
+      enabled: always # logging coloring
