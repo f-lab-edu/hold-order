@@ -1,6 +1,6 @@
 package com.holdOrder.HoldOrder.api.handler.exceptionHandler;
 
-import com.holdOrder.core.dto.error.ErrorResult;
+import com.holdOrder.HoldOrder.api.dto.ErrorResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
