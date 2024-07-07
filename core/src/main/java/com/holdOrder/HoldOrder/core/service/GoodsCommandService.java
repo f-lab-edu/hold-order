@@ -17,11 +17,11 @@ public class GoodsCommandService {
 
     @Transactional
     public GoodsDto save(GoodsDto insertedGoodsDto) {
-        Goods insertedGoods = GoodsMapper.INSTANCE.goodsDtoToGoods(insertedGoodsDto);
+        Goods insertedGoods = GoodsMapper.INSTANCE.map(insertedGoodsDto);
         insertedGoods.setDeletedYn(false);
         insertedGoods.setUsedYn(false);
 
-        return GoodsMapper.INSTANCE.goodsToGoodsDto(goodsRepository.save(insertedGoods));
+        return GoodsMapper.INSTANCE.map(goodsRepository.save(insertedGoods));
     }
 
     @Transactional

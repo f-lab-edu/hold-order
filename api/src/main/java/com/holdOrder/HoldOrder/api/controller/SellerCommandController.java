@@ -1,7 +1,8 @@
 package com.holdOrder.HoldOrder.api.controller;
 
 import com.holdOrder.HoldOrder.application.application.SellerApplication;
-import com.holdOrder.HoldOrder.core.domain.seller.Seller;
+import com.holdOrder.HoldOrder.application.dto.Seller.SellerSaveRequestDto;
+import com.holdOrder.HoldOrder.application.dto.Seller.SellerSaveResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +17,7 @@ public class SellerCommandController {
     private final SellerApplication sellerApplication;
 
     @PostMapping("/save")
-    public ResponseEntity<Seller> save(Seller inputSeller) { // TODO
+    public ResponseEntity<SellerSaveResponseDto> save(SellerSaveRequestDto inputSeller) {
         return new ResponseEntity<>(sellerApplication.save(inputSeller), HttpStatus.OK);
-
     }
 }

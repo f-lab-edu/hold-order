@@ -20,9 +20,12 @@ public class GoodsFindRequestDto {
     @Max(value = Long.MAX_VALUE)
     private Integer goodsPrice;
 
+    private String creator;
     @PastOrPresent(message = "과거 또는 현재 시간만 설정이 가능합니다.")
     private LocalDateTime createdAt;
 
+    private String modifier;
     @PastOrPresent(message = "과거 또는 현재 시간만 설정이 가능합니다.")
     private LocalDateTime modifiedAt;
+
 }

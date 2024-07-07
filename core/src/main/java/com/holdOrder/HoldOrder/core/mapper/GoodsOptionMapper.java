@@ -9,8 +9,8 @@ import org.mapstruct.factory.Mappers;
 public interface GoodsOptionMapper {
     GoodsOptionMapper INSTANCE = Mappers.getMapper(GoodsOptionMapper.class);
 
-    GoodsOptionDto goodsOptionToGoodsOptionDto(GoodsOption goodsOption);
-    GoodsOption goodsOptionDtoToGoodsOption(GoodsOptionDto goodsOptionDto);
+    GoodsOptionDto map(GoodsOption goodsOption);
+    GoodsOption map(GoodsOptionDto goodsOptionDto);
 
 
 }

@@ -5,6 +5,7 @@ import com.holdOrder.HoldOrder.core.domain.seller.Seller;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -19,4 +20,10 @@ public class GoodsDto {
     private Boolean usedYn;
     private Boolean deletedYn;
     private List<GoodsOption> goodsOptions;
+    private String creator;
+    private String modifier;
+    private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
+
+
 }

@@ -20,7 +20,7 @@ public class GoodsOptionFindService {
     @Transactional(readOnly = true)
     public GoodsOptionDto find(Long goodsOptionId) {
         GoodsOption goodsOption = goodsOptionRepository.findById(goodsOptionId).orElseThrow(() -> new NoSuchElementException("굿즈 " + goodsOptionId + "는 존재하지 않습니다."));
-        return GoodsOptionMapper.INSTANCE.goodsOptionToGoodsOptionDto(goodsOption);
+        return GoodsOptionMapper.INSTANCE.map(goodsOption);
     }
 
     @Transactional(readOnly = true)

@@ -2,6 +2,7 @@ package com.holdOrder.HoldOrder.core.config;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,19 +11,20 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
+@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public abstract class EntityDate {
-    @Column(name = "created_user", updatable = false)
-    private String createdUser;
+    @Column(name = "creator", updatable = false)
+    private String creator;
 
     @CreatedDate
     @Column(nullable = false, updatable = false, name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "modifiedUser")
-    private String modifiedUser;
+    @Column(name = "modifier")
+    private String modifier;
 
     @LastModifiedDate
     @Column(name = "modified_at")

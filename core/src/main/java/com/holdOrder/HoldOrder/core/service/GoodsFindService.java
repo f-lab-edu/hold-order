@@ -22,12 +22,12 @@ public class GoodsFindService {
             throw new NoSuchElementException("값이 존재하지 않습니다");
         });
 
-        return GoodsMapper.INSTANCE.goodsToGoodsDto(findGoods);
+        return GoodsMapper.INSTANCE.map(findGoods);
     }
 
     public List<GoodsDto> findList(Long sellerId) {
         List<Goods> allBySellerId = goodsRepository.findAllBySellerId(sellerId);
 
-        return allBySellerId.stream().map(GoodsMapper.INSTANCE::goodsToGoodsDto).collect(Collectors.toList());
+        return allBySellerId.stream().map(GoodsMapper.INSTANCE::map).collect(Collectors.toList());
     }
 }

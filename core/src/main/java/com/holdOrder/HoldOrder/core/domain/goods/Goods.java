@@ -1,5 +1,6 @@
 package com.holdOrder.HoldOrder.core.domain.goods;
 
+import com.holdOrder.HoldOrder.core.config.EntityDate;
 import com.holdOrder.HoldOrder.core.domain.goodsOption.GoodsOption;
 import com.holdOrder.HoldOrder.core.domain.seller.Seller;
 import jakarta.persistence.*;
@@ -17,7 +18,9 @@ import java.util.List;
 @SQLRestriction("deleted_yn = false")
 @ToString
 @EqualsAndHashCode(callSuper = false, of = "id")
-public class Goods {
+@Builder
+@AllArgsConstructor
+public class Goods extends EntityDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "goods_id")
@@ -42,16 +45,4 @@ public class Goods {
     @ToString.Exclude
     private List<GoodsOption> goodsOptions = new ArrayList<>();
 
-    @Builder
-    public Goods(Long id, Seller seller, String name, String introduction, String goodsImageUrl, Integer goodsPrice, Boolean usedYn, Boolean deletedYn, List<GoodsOption> goodsOptions) {
-        this.id = id;
-        this.seller = seller;
-        this.name = name;
-        this.introduction = introduction;
-        this.goodsImageUrl = goodsImageUrl;
-        this.goodsPrice = goodsPrice;
-        this.usedYn = usedYn;
-        this.deletedYn = deletedYn;
-        this.goodsOptions = goodsOptions;
-    }
 }

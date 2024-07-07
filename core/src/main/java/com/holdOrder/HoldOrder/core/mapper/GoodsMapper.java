@@ -9,7 +9,7 @@ import org.mapstruct.factory.Mappers;
 public interface GoodsMapper {
     GoodsMapper INSTANCE = Mappers.getMapper(GoodsMapper.class);
 
-    GoodsDto goodsToGoodsDto(Goods goods);
+    GoodsDto map(Goods goods);
 
-    Goods goodsDtoToGoods(GoodsDto goodsDto);
+    Goods map(GoodsDto goodsDto);
 }

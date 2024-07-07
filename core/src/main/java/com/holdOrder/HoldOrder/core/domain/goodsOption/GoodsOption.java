@@ -12,7 +12,7 @@ import lombok.*;
 @Table(name = "goods_option")
 @ToString
 @EqualsAndHashCode(callSuper = false, of = "id")
-public class GoodsOption {
+public class GoodsOption extends EntityDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "option_id")

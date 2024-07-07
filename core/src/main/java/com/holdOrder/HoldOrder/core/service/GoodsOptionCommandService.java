@@ -26,18 +26,18 @@ public class GoodsOptionCommandService {
     public GoodsOptionDto saveWithSort(GoodsOptionDto goodsOptionDto, Long goodsId) {
         Integer topSortValue = goodsOptionRepository.findTopByGoodsIdOrderBySortDesc(goodsId);
         topSortValue = topSortValue == null ? 0 : topSortValue;
-        GoodsOption goodsOption = GoodsOptionMapper.INSTANCE.goodsOptionDtoToGoodsOption(goodsOptionDto);
+        GoodsOption goodsOption = GoodsOptionMapper.INSTANCE.map(goodsOptionDto);
         goodsOption.setSort(topSortValue + 1);
 
         GoodsOption savedGoodsOption = goodsOptionRepository.save(goodsOption);
 
-        return GoodsOptionMapper.INSTANCE.goodsOptionToGoodsOptionDto(savedGoodsOption);
+        return GoodsOptionMapper.INSTANCE.map(savedGoodsOption);
     }
 
     // GoodsOption 하나 수정하기
     @Transactional
     public GoodsOptionDto modify(GoodsOptionDto goodsOptionDto) {
-        GoodsOption goodsOption = GoodsOptionMapper.INSTANCE.goodsOptionDtoToGoodsOption(goodsOptionDto);
+        GoodsOption goodsOption = GoodsOptionMapper.INSTANCE.map(goodsOptionDto);
 
         String errorMessage = "";
 
@@ -65,7 +65,7 @@ public class GoodsOptionCommandService {
 
         GoodsOption savedGoodsOption = goodsOptionRepository.save(goodsOption);
 
-        return GoodsOptionMapper.INSTANCE.goodsOptionToGoodsOptionDto(savedGoodsOption);
+        return GoodsOptionMapper.INSTANCE.map(savedGoodsOption);
     }
 
     // GoodsOption 하나 삭제하기
