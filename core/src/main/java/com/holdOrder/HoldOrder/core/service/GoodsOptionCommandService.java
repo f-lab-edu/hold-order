@@ -2,9 +2,8 @@ package com.holdOrder.HoldOrder.core.service;
 
 import com.holdOrder.HoldOrder.core.domain.goodsOption.GoodsOption;
 import com.holdOrder.HoldOrder.core.domain.goodsOption.GoodsOptionRepository;
-import com.holdOrder.HoldOrder.core.dto.goodsOption.GoodsOptionModifyRequestDto;
 import com.holdOrder.HoldOrder.core.dto.goodsOption.GoodsOptionDto;
-import com.holdOrder.HoldOrder.core.dto.goodsOption.GoodsOptionSaveRequestDto;
+import com.holdOrder.HoldOrder.core.mapper.GoodsOptionMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,45 +23,49 @@ public class GoodsOptionCommandService {
 
     // GoodsOption 하나 저장하기
     @Transactional
-    public GoodsOptionDto saveWithSort(GoodsOptionSaveRequestDto goodsOptionSaveRequestDto) {
-        Integer topSortValue = goodsOptionRepository.findTopByGoodsIdOrderBySortDesc(goodsOptionSaveRequestDto.getGoodsId());
+    public GoodsOptionDto saveWithSort(GoodsOptionDto goodsOptionDto, Long goodsId) {
+        Integer topSortValue = goodsOptionRepository.findTopByGoodsIdOrderBySortDesc(goodsId);
         topSortValue = topSortValue == null ? 0 : topSortValue;
-        GoodsOption goodsOptionDto = goodsOptionSaveRequestDto.getGoodsOption();
-        goodsOptionDto.setSort(topSortValue + 1);
+        GoodsOption goodsOption = GoodsOptionMapper.INSTANCE.goodsOptionDtoToGoodsOption(goodsOptionDto);
+        goodsOption.setSort(topSortValue + 1);
 
-        return null;
-//        return goodsOptionRepository.save(goodsOptionDto);
+        GoodsOption savedGoodsOption = goodsOptionRepository.save(goodsOption);
+
+        return GoodsOptionMapper.INSTANCE.goodsOptionToGoodsOptionDto(savedGoodsOption);
     }
 
     // GoodsOption 하나 수정하기
     @Transactional
-    public GoodsOptionDto modify(GoodsOptionModifyRequestDto goodsOptionModifyRequestDto) {
-        GoodsOption goodsOptionDto = GoodsOption.builder()
-                .id(goodsOptionModifyRequestDto.getId())
-                .name(goodsOptionModifyRequestDto.getName())
-                .optionPrice(goodsOptionModifyRequestDto.getOptionPrice())
-                .sort(goodsOptionModifyRequestDto.getSort())
-                .build();
+    public GoodsOptionDto modify(GoodsOptionDto goodsOptionDto) {
+        GoodsOption goodsOption = GoodsOptionMapper.INSTANCE.goodsOptionDtoToGoodsOption(goodsOptionDto);
 
         String errorMessage = "";
 
-        Long goodsIdByGoodsOptionId = goodsOptionRepository.findGoodsIdByGoodsOptionId(goodsOptionDto.getId());
+        Long goodsIdByGoodsOptionId = goodsOptionRepository.findGoodsIdById(goodsOption.getId()); // TODO
+
+        if (goodsIdByGoodsOptionId == null) {
+            errorMessage = "굿즈옵션 정보가 잘못됐습니다";
+        }
 
         // sort 중복여부 체크
-        List<GoodsOption> allByGoodsId = goodsOptionRepository.findAllByGoodsId(goodsIdByGoodsOptionId);
-        long countedDuplicateSort = allByGoodsId.stream().filter(item -> item.getSort().equals(goodsOptionDto.getSort())).count();
-        if (countedDuplicateSort != 0) errorMessage = "중복된 정렬이 존재합니다";
+        List<GoodsOption> allByGoodsId = goodsOptionRepository.findAllByGoodsId(goodsIdByGoodsOptionId); // TODO
+        long countedDuplicateSort = allByGoodsId.stream().filter(item -> item.getSort().equals(goodsOption.getSort())).count();
+        if (countedDuplicateSort != 0) {
+            errorMessage = "중복된 정렬이 존재합니다";
+        }
 
         // 이름 중복여부 체크
-        long countedDuplicateName = allByGoodsId.stream().filter(item -> item.getName().equals(goodsOptionDto.getName())).count();
-        if (countedDuplicateName != 0) errorMessage = "중복된 이름이 존재합니다";
+        long countedDuplicateName = allByGoodsId.stream().filter(item -> item.getName().equals(goodsOption.getName())).count();
+        if (countedDuplicateName != 0) {
+            errorMessage = "중복된 이름이 존재합니다";
+        }
 
         // throw exception
         if (!errorMessage.equals("")) throw new DataIntegrityViolationException(errorMessage);
 
-        GoodsOption savedGoodsOption = goodsOptionRepository.save(goodsOptionDto);
-        return null;
-//        return new GoodsOptionModifyResponseDto(savedGoodsOption);
+        GoodsOption savedGoodsOption = goodsOptionRepository.save(goodsOption);
+
+        return GoodsOptionMapper.INSTANCE.goodsOptionToGoodsOptionDto(savedGoodsOption);
     }
 
     // GoodsOption 하나 삭제하기

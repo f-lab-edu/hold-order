@@ -15,9 +15,9 @@ spring:
         username: mydb_slave_user
         password: mydb_slave_pwd
   jpa:
-    open-in-view: false
+    open-in-view: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       '[hibernate.default_batch_fetch_size]': 100  # rimit in size is 100
       '[hibernate.format_sql]': true

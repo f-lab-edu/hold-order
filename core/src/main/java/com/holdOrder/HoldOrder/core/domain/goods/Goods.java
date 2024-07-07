@@ -1,6 +1,5 @@
 package com.holdOrder.HoldOrder.core.domain.goods;
 
-import com.holdOrder.HoldOrder.core.config.EntityDate;
 import com.holdOrder.HoldOrder.core.domain.goodsOption.GoodsOption;
 import com.holdOrder.HoldOrder.core.domain.seller.Seller;
 import jakarta.persistence.*;
@@ -18,7 +17,7 @@ import java.util.List;
 @SQLRestriction("deleted_yn = false")
 @ToString
 @EqualsAndHashCode(callSuper = false, of = "id")
-public class Goods extends EntityDate {
+public class Goods {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "goods_id")

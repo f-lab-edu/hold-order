@@ -1,4 +1,4 @@
-package com.holdOrder.HoldOrder.core.dto.goodsOption;
+package com.holdOrder.HoldOrder.application.dto.goodsOption;
 
 
 import jakarta.validation.constraints.*;
