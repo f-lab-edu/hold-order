@@ -9,6 +9,9 @@ import com.holdOrder.HoldOrder.core.service.GoodsOptionFindService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Component
 public class GoodsOptionApplication {
@@ -18,7 +21,7 @@ public class GoodsOptionApplication {
     public GoodsOptionFindResponseDto find(Long goodsOptionId) {
         GoodsOptionDto goodsOptionDto = goodsOptionFindService.find(goodsOptionId);
         return GoodsOptionFindResponseDto.builder()
-                .id(String.valueOf(goodsOptionDto.getId()))
+                .id(goodsOptionDto.getId())
                 .name(goodsOptionDto.getName())
                 .optionPrice(goodsOptionDto.getOptionPrice())
                 .creator(goodsOptionDto.getCreator())
@@ -26,6 +29,20 @@ public class GoodsOptionApplication {
                 .createdAt(goodsOptionDto.getCreatedAt())
                 .modifiedAt(goodsOptionDto.getModifiedAt())
                 .build();
+    }
+
+    public List<GoodsOptionFindResponseDto> findList(Long goodsId) {
+        List<GoodsOptionDto> findALLGoodsOptionByGoodsId = goodsOptionFindService.findList(goodsId);
+        return findALLGoodsOptionByGoodsId.stream().map(goodsOptionDto -> GoodsOptionFindResponseDto.builder()
+                        .id(goodsOptionDto.getId())
+                        .name(goodsOptionDto.getName())
+                        .optionPrice(goodsOptionDto.getOptionPrice())
+                        .creator(goodsOptionDto.getCreator())
+                        .createdAt(goodsOptionDto.getCreatedAt())
+                        .modifier(goodsOptionDto.getModifier())
+                        .modifiedAt(goodsOptionDto.getModifiedAt())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     public GoodsOptionSaveResponseDto saveWithSort(GoodsOptionSaveRequestDto goodsOptionSaveRequestDto) {

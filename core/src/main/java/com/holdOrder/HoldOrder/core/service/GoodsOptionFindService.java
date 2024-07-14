@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,12 +25,6 @@ public class GoodsOptionFindService {
     @Transactional(readOnly = true)
     public List<GoodsOptionDto> findList(Long goodsId) {
         List<GoodsOption> goodsOptionList = goodsOptionRepository.findAllByGoodsId(goodsId);
-
-        return goodsOptionList.stream().map((item) -> GoodsOptionDto.builder()
-                .id(item.getId())
-                .name(item.getName())
-                .optionPrice(item.getOptionPrice())
-                .sort(item.getSort())
-                .build()).collect(Collectors.toList());
+        return GoodsOptionMapper.INSTANCE.map(goodsOptionList);
     }
 }

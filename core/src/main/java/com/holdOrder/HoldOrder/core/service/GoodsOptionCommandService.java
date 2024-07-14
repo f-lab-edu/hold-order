@@ -1,5 +1,6 @@
 package com.holdOrder.HoldOrder.core.service;
 
+import com.holdOrder.HoldOrder.core.domain.goods.Goods;
 import com.holdOrder.HoldOrder.core.domain.goodsOption.GoodsOption;
 import com.holdOrder.HoldOrder.core.domain.goodsOption.GoodsOptionRepository;
 import com.holdOrder.HoldOrder.core.dto.goodsOption.GoodsOptionDto;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -29,6 +31,9 @@ public class GoodsOptionCommandService {
         GoodsOption goodsOption = GoodsOptionMapper.INSTANCE.map(goodsOptionDto);
         goodsOption.setSort(topSortValue + 1);
 
+        // goods id 설정
+        goodsOption.setGoods(Goods.builder().id(goodsId).build());
+
         GoodsOption savedGoodsOption = goodsOptionRepository.save(goodsOption);
 
         return GoodsOptionMapper.INSTANCE.map(savedGoodsOption);
@@ -39,31 +44,25 @@ public class GoodsOptionCommandService {
     public GoodsOptionDto modify(GoodsOptionDto goodsOptionDto) {
         GoodsOption goodsOption = GoodsOptionMapper.INSTANCE.map(goodsOptionDto);
 
-        String errorMessage = "";
-
-        Long goodsIdByGoodsOptionId = goodsOptionRepository.findGoodsIdById(goodsOption.getId()); // TODO
-
-        if (goodsIdByGoodsOptionId == null) {
-            errorMessage = "굿즈옵션 정보가 잘못됐습니다";
-        }
+        GoodsOption findGoodsOption = goodsOptionRepository.findById(goodsOption.getId()).orElseThrow(() -> new EntityNotFoundException("굿즈옵션을 찾을 수 없습니다."));
 
         // sort 중복여부 체크
-        List<GoodsOption> allByGoodsId = goodsOptionRepository.findAllByGoodsId(goodsIdByGoodsOptionId); // TODO
-        long countedDuplicateSort = allByGoodsId.stream().filter(item -> item.getSort().equals(goodsOption.getSort())).count();
-        if (countedDuplicateSort != 0) {
-            errorMessage = "중복된 정렬이 존재합니다";
-        }
+        List<GoodsOption> allByGoodsId = goodsOptionRepository.findAllByGoodsId(findGoodsOption.getGoods().getId());
+        allByGoodsId.forEach(item -> {
+            if (goodsOptionDto.getSort() != null && item.getSort().equals(goodsOptionDto.getSort())) {
+                throw new DataIntegrityViolationException("중복된 정렬이 존재합니다");
+            }
 
-        // 이름 중복여부 체크
-        long countedDuplicateName = allByGoodsId.stream().filter(item -> item.getName().equals(goodsOption.getName())).count();
-        if (countedDuplicateName != 0) {
-            errorMessage = "중복된 이름이 존재합니다";
-        }
+            if (goodsOptionDto.getName() != null && item.getName().equals(goodsOptionDto.getName())) {
+                throw new DataIntegrityViolationException("중복된 이름이 존재합니다");
+            }
+        });
 
-        // throw exception
-        if (!errorMessage.equals("")) throw new DataIntegrityViolationException(errorMessage);
+        Optional.ofNullable(goodsOptionDto.getName()).ifPresent(a -> findGoodsOption.setName(goodsOptionDto.getName()));
+        Optional.ofNullable(goodsOptionDto.getOptionPrice()).ifPresent(a -> findGoodsOption.setOptionPrice(goodsOptionDto.getOptionPrice()));
+        Optional.ofNullable(goodsOption.getSort()).ifPresent(a -> findGoodsOption.setSort(goodsOption.getSort()));
 
-        GoodsOption savedGoodsOption = goodsOptionRepository.save(goodsOption);
+        GoodsOption savedGoodsOption = goodsOptionRepository.save(findGoodsOption);
 
         return GoodsOptionMapper.INSTANCE.map(savedGoodsOption);
     }

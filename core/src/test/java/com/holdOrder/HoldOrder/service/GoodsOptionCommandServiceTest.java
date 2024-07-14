@@ -92,7 +92,7 @@ class GoodsOptionCommandServiceTest {
                 .sort(4)
                 .build();
 
-        GoodsOption goodsOption = GoodsOptionMapper.INSTANCE.goodsOptionDtoToGoodsOption(goodsOptionDto);
+        GoodsOption goodsOption = GoodsOptionMapper.INSTANCE.map(goodsOptionDto);
 
         // stub
         when(goodsOptionRepository.findAllByGoodsId(any(Long.class))).thenReturn(goodsOptionList);

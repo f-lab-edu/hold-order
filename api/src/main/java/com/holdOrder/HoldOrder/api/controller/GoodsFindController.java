@@ -2,6 +2,8 @@ package com.holdOrder.HoldOrder.api.controller;
 
 import com.holdOrder.HoldOrder.application.application.GoodsApplication;
 import com.holdOrder.HoldOrder.application.dto.goods.GoodsInfoResponseDto;
+import com.holdOrder.HoldOrder.application.dto.goods.GoodsSearchRequestDto;
+import com.holdOrder.HoldOrder.application.dto.goods.GoodsSearchResponseDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,7 +24,12 @@ public class GoodsFindController {
     }
 
     @PostMapping("/list")
-    public ResponseEntity<List<GoodsInfoResponseDto>> findList(@Valid Long sellerId) {
+    public ResponseEntity<List<GoodsInfoResponseDto>> findList(@Valid @RequestParam Long sellerId) {
         return new ResponseEntity<>(goodsApplication.findList(sellerId), HttpStatus.OK);
+    }
+
+    @PostMapping("/searchList")
+    public ResponseEntity<GoodsSearchResponseDto> searchList(@RequestBody GoodsSearchRequestDto goodsSearchRequestDto) {
+        return new ResponseEntity<>(goodsApplication.searchList(goodsSearchRequestDto), HttpStatus.OK);
     }
 }

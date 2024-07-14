@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -50,9 +51,37 @@ public class GoodsApplication {
     }
 
     public List<GoodsInfoResponseDto> findList(Long sellerId) {
-        List<GoodsDto> list = goodsFindService.findList(sellerId);
-//        return list.stream().map(GoodsDtoMapper.INSTANCE::goodsDtoToGoodsInfoResponseDto).collect(Collectors.toList());
-        return null;
+        List<GoodsDto> findGoodsDtoBySellerId = goodsFindService.findList(sellerId);
+        return findGoodsDtoBySellerId.stream().map(goodsDto -> GoodsInfoResponseDto.builder()
+                        .id(goodsDto.getId())
+                        .name(goodsDto.getName())
+                        .intr(goodsDto.getIntroduction())
+                        .goodsPrice(goodsDto.getGoodsPrice())
+                        .creator(goodsDto.getCreator())
+                        .createdAt(goodsDto.getCreatedAt())
+                        .modifier(goodsDto.getModifier())
+                        .modifiedAt(goodsDto.getModifiedAt())
+                        .build())
+                .collect(Collectors.toList());
+    }
 
+    public GoodsSearchResponseDto searchList(GoodsSearchRequestDto goodsSearchRequestDto) {
+        List<GoodsDto> searchList = goodsFindService.searchList(GoodsDtoMapper.INSTANCE.map(goodsSearchRequestDto));
+
+        List<GoodsInfoResponseDto> collect = searchList.stream().map(goodsDto -> GoodsInfoResponseDto.builder()
+                        .id(goodsDto.getId())
+                        .name(goodsDto.getName())
+                        .intr(goodsDto.getIntroduction())
+                        .goodsPrice(goodsDto.getGoodsPrice())
+                        .creator(goodsDto.getCreator())
+                        .createdAt(goodsDto.getCreatedAt())
+                        .modifier(goodsDto.getModifier())
+                        .modifiedAt(goodsDto.getModifiedAt())
+                        .build())
+                .collect(Collectors.toList());
+        return GoodsSearchResponseDto.builder()
+                .goodsFindResponseDtoList(collect)
+                .totalCount(collect.size())
+                .build();
     }
 }
