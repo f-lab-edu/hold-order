@@ -15,13 +15,17 @@ spring:
         username: mydb_slave_user
         password: mydb_slave_pwd
   jpa:
-    open-in-view: true
+    open-in-view: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
-      '[hibernate.default_batch_fetch_size]': 100  # rimit in size is 100
+#      '[hibernate.default_batch_fetch_size]': 100  # rimit in size is 100
       '[hibernate.format_sql]': true
     show-sql: true
   output:
     ansi:
       enabled: always # logging coloring
+logging:
+  level:
+    org.hibernate:
+      orm.jdbc.bind: trace

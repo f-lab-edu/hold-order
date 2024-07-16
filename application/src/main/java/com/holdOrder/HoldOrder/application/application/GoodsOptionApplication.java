@@ -9,6 +9,9 @@ import com.holdOrder.HoldOrder.core.service.GoodsOptionFindService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Component
 public class GoodsOptionApplication {
@@ -17,17 +20,52 @@ public class GoodsOptionApplication {
 
     public GoodsOptionFindResponseDto find(Long goodsOptionId) {
         GoodsOptionDto goodsOptionDto = goodsOptionFindService.find(goodsOptionId);
-        return GoodsOptionDtoMapper.INSTANCE.goodsOptionDtoToGoodsOptionFindResponseDto(goodsOptionDto);
+        return GoodsOptionFindResponseDto.builder()
+                .id(goodsOptionDto.getId())
+                .name(goodsOptionDto.getName())
+                .optionPrice(goodsOptionDto.getOptionPrice())
+                .creator(goodsOptionDto.getCreator())
+                .modifier(goodsOptionDto.getModifier())
+                .createdAt(goodsOptionDto.getCreatedAt())
+                .modifiedAt(goodsOptionDto.getModifiedAt())
+                .build();
+    }
+
+    public List<GoodsOptionFindResponseDto> findList(Long goodsId) {
+        List<GoodsOptionDto> findALLGoodsOptionByGoodsId = goodsOptionFindService.findList(goodsId);
+        return findALLGoodsOptionByGoodsId.stream().map(goodsOptionDto -> GoodsOptionFindResponseDto.builder()
+                        .id(goodsOptionDto.getId())
+                        .name(goodsOptionDto.getName())
+                        .optionPrice(goodsOptionDto.getOptionPrice())
+                        .creator(goodsOptionDto.getCreator())
+                        .createdAt(goodsOptionDto.getCreatedAt())
+                        .modifier(goodsOptionDto.getModifier())
+                        .modifiedAt(goodsOptionDto.getModifiedAt())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     public GoodsOptionSaveResponseDto saveWithSort(GoodsOptionSaveRequestDto goodsOptionSaveRequestDto) {
-        GoodsOptionDto goodsOptionDto = goodsOptionCommandService.saveWithSort(GoodsOptionMapper.INSTANCE.goodsOptionToGoodsOptionDto(goodsOptionSaveRequestDto.getGoodsOption()), goodsOptionSaveRequestDto.getGoodsId());
-        return GoodsOptionDtoMapper.INSTANCE.goodsOptionDtoToGoodsOptionSaveResponseDto(goodsOptionDto);
+        GoodsOptionDto goodsOptionDto = goodsOptionCommandService.saveWithSort(GoodsOptionMapper.INSTANCE.map(goodsOptionSaveRequestDto.getGoodsOption()), goodsOptionSaveRequestDto.getGoodsId());
+        return GoodsOptionSaveResponseDto.builder()
+                .name(goodsOptionDto.getName())
+                .optionPrice(goodsOptionDto.getOptionPrice())
+                .sort(goodsOptionDto.getSort())
+                .creator(goodsOptionDto.getCreator())
+                .createdAt(goodsOptionDto.getCreatedAt())
+                .build();
     }
 
     public GoodsOptionModifyResponseDto modify(GoodsOptionModifyRequestDto goodsOptionModifyRequestDto) {
-        GoodsOptionDto modify = goodsOptionCommandService.modify(GoodsOptionDtoMapper.INSTANCE.goodsOptionModifyRequestDtoToGoodsOptionDto(goodsOptionModifyRequestDto));
-        return GoodsOptionDtoMapper.INSTANCE.goodsOptionDtoToGoodsOptionModifyResponseDto(modify);
+        GoodsOptionDto modify = goodsOptionCommandService.modify(GoodsOptionDtoMapper.INSTANCE.map(goodsOptionModifyRequestDto));
+        return GoodsOptionModifyResponseDto.builder()
+                .id(modify.getId())
+                .name(modify.getName())
+                .optionPrice(modify.getOptionPrice())
+                .sort(modify.getSort())
+                .modifier(modify.getModifier())
+                .modifiedAt(modify.getModifiedAt())
+                .build();
     }
 
     public void remove(Long id) {
