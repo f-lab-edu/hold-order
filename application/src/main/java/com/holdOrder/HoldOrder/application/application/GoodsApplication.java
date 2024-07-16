@@ -7,6 +7,9 @@ import com.holdOrder.HoldOrder.core.dto.goods.GoodsDto;
 import com.holdOrder.HoldOrder.core.service.GoodsCommandService;
 import com.holdOrder.HoldOrder.core.service.GoodsFindService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -83,5 +86,23 @@ public class GoodsApplication {
                 .goodsFindResponseDtoList(collect)
                 .totalCount(collect.size())
                 .build();
+    }
+
+    public Page<GoodsInfoResponseDto> searchListWithPageable(GoodsSearchRequestDto goodsSearchRequestDto, Pageable pageable) {
+        Page<GoodsDto> page = goodsFindService.searchListWithPageable(GoodsDtoMapper.INSTANCE.map(goodsSearchRequestDto), pageable);
+
+        List<GoodsInfoResponseDto> collect = page.getContent().stream().map(goodsDto -> GoodsInfoResponseDto.builder()
+                        .id(goodsDto.getId())
+                        .name(goodsDto.getName())
+                        .intr(goodsDto.getIntroduction())
+                        .goodsPrice(goodsDto.getGoodsPrice())
+                        .creator(goodsDto.getCreator())
+                        .createdAt(goodsDto.getCreatedAt())
+                        .modifier(goodsDto.getModifier())
+                        .modifiedAt(goodsDto.getModifiedAt())
+                        .build())
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(collect, pageable, page.getTotalElements());
     }
 }

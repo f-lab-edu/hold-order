@@ -18,7 +18,7 @@ public class GoodsOption extends EntityDate {
     @Column(name = "option_id")
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "goods_id")
+    @JoinColumn(name = "goods_id", referencedColumnName = "goods_id")
     @ToString.Exclude
     private Goods goods;
     @Column(name = "name")

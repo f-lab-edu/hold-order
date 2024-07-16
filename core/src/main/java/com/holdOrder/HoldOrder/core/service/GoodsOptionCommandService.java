@@ -1,6 +1,5 @@
 package com.holdOrder.HoldOrder.core.service;
 
-import com.holdOrder.HoldOrder.core.domain.goods.Goods;
 import com.holdOrder.HoldOrder.core.domain.goodsOption.GoodsOption;
 import com.holdOrder.HoldOrder.core.domain.goodsOption.GoodsOptionRepository;
 import com.holdOrder.HoldOrder.core.dto.goodsOption.GoodsOptionDto;
@@ -32,7 +31,7 @@ public class GoodsOptionCommandService {
         goodsOption.setSort(topSortValue + 1);
 
         // goods id 설정
-        goodsOption.setGoods(Goods.builder().id(goodsId).build());
+//        goodsOption.setGoods(Goods.builder().id(goodsId).build());
 
         GoodsOption savedGoodsOption = goodsOptionRepository.save(goodsOption);
 

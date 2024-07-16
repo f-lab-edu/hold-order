@@ -2,15 +2,15 @@ package com.holdOrder.HoldOrder.core.dto.goods;
 
 import com.holdOrder.HoldOrder.core.domain.goods.GoodsDeletedState;
 import com.holdOrder.HoldOrder.core.domain.goods.GoodsUsedState;
-import com.holdOrder.HoldOrder.core.domain.goodsOption.GoodsOption;
 import com.holdOrder.HoldOrder.core.domain.seller.Seller;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Builder
 public class GoodsDto {
     private Long id;
@@ -21,7 +21,7 @@ public class GoodsDto {
     private Integer goodsPrice;
     private GoodsUsedState usedYn;
     private GoodsDeletedState deletedYn;
-    private List<GoodsOption> goodsOptions;
+//    private List<GoodsOption> goodsOptions;
     private String creator;
     private String modifier;
     private LocalDateTime createdAt;

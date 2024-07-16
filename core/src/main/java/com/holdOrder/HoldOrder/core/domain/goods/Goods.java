@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "goods")
 @SQLRestriction("deleted_yn = 'N'")
-@ToString
+//@ToString
 @EqualsAndHashCode(callSuper = false, of = "id")
 @Builder
 @AllArgsConstructor
@@ -44,7 +44,7 @@ public class Goods extends EntityDate {
     @Enumerated(EnumType.STRING)
     private GoodsDeletedState deletedYn;
     @OneToMany(mappedBy = "goods", fetch = FetchType.LAZY)
-    @ToString.Exclude
+//    @ToString.Exclude
     private List<GoodsOption> goodsOptions = new ArrayList<>();
 
 }

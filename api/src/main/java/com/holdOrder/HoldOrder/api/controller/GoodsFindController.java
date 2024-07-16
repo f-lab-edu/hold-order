@@ -6,6 +6,8 @@ import com.holdOrder.HoldOrder.application.dto.goods.GoodsSearchRequestDto;
 import com.holdOrder.HoldOrder.application.dto.goods.GoodsSearchResponseDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,4 +34,10 @@ public class GoodsFindController {
     public ResponseEntity<GoodsSearchResponseDto> searchList(@RequestBody GoodsSearchRequestDto goodsSearchRequestDto) {
         return new ResponseEntity<>(goodsApplication.searchList(goodsSearchRequestDto), HttpStatus.OK);
     }
+
+    @PostMapping("/searchList/paging")
+    public ResponseEntity<Page<GoodsInfoResponseDto>> searchListWithPageable(@RequestBody GoodsSearchRequestDto goodsSearchRequestDto, Pageable pageable) {
+        return new ResponseEntity<>(goodsApplication.searchListWithPageable(goodsSearchRequestDto, pageable), HttpStatus.OK);
+    }
+
 }

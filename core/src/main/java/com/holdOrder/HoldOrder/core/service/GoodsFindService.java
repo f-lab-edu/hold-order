@@ -6,6 +6,8 @@ import com.holdOrder.HoldOrder.core.dto.goods.GoodsDto;
 import com.holdOrder.HoldOrder.core.mapper.GoodsMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,9 +35,15 @@ public class GoodsFindService {
         return GoodsMapper.INSTANCE.map(findGoodsBySellerId);
     }
 
-//    @Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public List<GoodsDto> searchList(GoodsDto goodsDto) {
         List<Goods> searchList = goodsRepository.searchList(goodsDto);
         return GoodsMapper.INSTANCE.map(searchList);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<GoodsDto> searchListWithPageable(GoodsDto goodsDto, Pageable pageable) {
+        Page<Goods> goodsPage = goodsRepository.searchListWithPageable(goodsDto, pageable);
+        return new PageImpl<>(GoodsMapper.INSTANCE.map(goodsPage.getContent()), pageable, goodsPage.getTotalElements());
     }
 }
