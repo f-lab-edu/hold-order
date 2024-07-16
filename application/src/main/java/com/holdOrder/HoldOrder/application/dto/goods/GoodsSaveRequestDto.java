@@ -2,6 +2,7 @@ package com.holdOrder.HoldOrder.application.dto.goods;
 
 import lombok.Data;
 
+
 @Data
 public class GoodsSaveRequestDto {
     private String sellerId;

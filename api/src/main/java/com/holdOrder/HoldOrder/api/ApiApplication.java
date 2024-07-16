@@ -1,14 +1,13 @@
 package com.holdOrder.HoldOrder.api;
 
-import com.holdOrder.HoldOrder.application.config.ApplicationConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Import;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-//@Import(ApplicationConfig.class)
-@ComponentScan(value = "com.holdOrder")
+@ComponentScan(value = "com.holdOrder") // 타 모듈의 bean 등록을 위한 설정
+@EnableJpaAuditing
 public class ApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(ApiApplication.class, args);

@@ -17,7 +17,7 @@ public class GoodsOptionRepositoryImpl implements GoodsOptionRepositoryCustom {
     public List<GoodsOption> findAllByGoodsId(Long goodsId) {
         return jpaQueryFactory
                 .selectFrom(qGoodsOption)
-                .where(qGoodsOption.id.eq(goodsId))
+                .where(qGoods.id.eq(goodsId))
                 .fetch();
     }
 

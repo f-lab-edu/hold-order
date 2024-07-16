@@ -4,6 +4,7 @@ import com.holdOrder.HoldOrder.core.domain.goodsOption.GoodsOption;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -16,5 +17,8 @@ public class GoodsInfoResponseDto {
     private String intr;
     private Integer goodsPrice;
     private List<GoodsOption> goodsOptionList;
-
+    private String creator;
+    private String modifier;
+    private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
 }

@@ -16,7 +16,7 @@ public class SellerCommandService {
 
     @Transactional
     public SellerDto saveOne(SellerDto inputSeller) {
-        Seller savedSeller = sellerRepository.save(SellerMapper.INSTANCE.sellerDtoToSeller(inputSeller));
-        return SellerMapper.INSTANCE.sellerToSellerDto(savedSeller);
+        Seller savedSeller = sellerRepository.save(SellerMapper.INSTANCE.map(inputSeller));
+        return SellerMapper.INSTANCE.map(savedSeller);
     }
 }

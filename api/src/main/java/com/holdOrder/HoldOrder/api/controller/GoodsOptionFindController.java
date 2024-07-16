@@ -10,14 +10,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/v1/goods-option/find/")
 @RequiredArgsConstructor
 public class GoodsOptionFindController {
     private final GoodsOptionApplication goodsOptionApplication;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<GoodsOptionFindResponseDto> find(@PathVariable Long id) {
-        return new ResponseEntity<>(goodsOptionApplication.find(id), HttpStatus.OK);
+    @GetMapping("/{goodsOptionId}")
+    public ResponseEntity<GoodsOptionFindResponseDto> find(@PathVariable Long goodsOptionId) {
+        return new ResponseEntity<>(goodsOptionApplication.find(goodsOptionId), HttpStatus.OK);
     }
+
+    @GetMapping("list/{goodsId}")
+    public ResponseEntity<List<GoodsOptionFindResponseDto>> findList(@PathVariable Long goodsId) {
+        return new ResponseEntity<>(goodsOptionApplication.findList(goodsId), HttpStatus.OK);
+    }
+
 }

@@ -4,6 +4,8 @@ import com.holdOrder.HoldOrder.core.domain.goods.Goods;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 public class GoodsOptionDto {
@@ -12,4 +14,9 @@ public class GoodsOptionDto {
     private String name;
     private Integer optionPrice;
     private Integer sort;
+    private String creator;
+    private String modifier;
+    private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
+
 }

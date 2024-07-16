@@ -1,5 +1,6 @@
 package com.holdOrder.HoldOrder.core.domain.seller;
 
+import com.holdOrder.HoldOrder.core.config.EntityDate;
 import com.holdOrder.HoldOrder.core.domain.goods.Goods;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ import java.util.List;
 @Table(name = "seller")
 @ToString
 @EqualsAndHashCode(callSuper = false, of = "id")
-public class Seller {
+public class Seller extends EntityDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seller_id")

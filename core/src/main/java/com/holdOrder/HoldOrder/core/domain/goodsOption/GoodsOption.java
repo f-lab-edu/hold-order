@@ -12,13 +12,13 @@ import lombok.*;
 @Table(name = "goods_option")
 @ToString
 @EqualsAndHashCode(callSuper = false, of = "id")
-public class GoodsOption {
+public class GoodsOption extends EntityDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "option_id")
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "goods_id")
+    @JoinColumn(name = "goods_id", referencedColumnName = "goods_id")
     @ToString.Exclude
     private Goods goods;
     @Column(name = "name")

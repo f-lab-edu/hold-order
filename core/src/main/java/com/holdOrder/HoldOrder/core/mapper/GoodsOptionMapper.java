@@ -5,12 +5,14 @@ import com.holdOrder.HoldOrder.core.dto.goodsOption.GoodsOptionDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface GoodsOptionMapper {
     GoodsOptionMapper INSTANCE = Mappers.getMapper(GoodsOptionMapper.class);
 
-    GoodsOptionDto goodsOptionToGoodsOptionDto(GoodsOption goodsOption);
-    GoodsOption goodsOptionDtoToGoodsOption(GoodsOptionDto goodsOptionDto);
-
+    GoodsOptionDto map(GoodsOption goodsOption);
+    GoodsOption map(GoodsOptionDto goodsOptionDto);
+    List<GoodsOptionDto> map(List<GoodsOption> goodsOptionList);
 
 }
